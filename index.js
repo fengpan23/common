@@ -354,6 +354,14 @@ Common.prototype.count = function(input){
     return result;
 };
 
+Common.prototype.first = function(input){
+    if (input && typeof(input) === 'object') {
+        for (let key in input) return {key: key, value: input[key]};
+    } else
+        return false;
+};
+
+
 Common.prototype.range = function(start, end, step) {
     let range = [],
         typeofStart = typeof start,
@@ -385,6 +393,7 @@ Common.prototype.range = function(start, end, step) {
         return false;
     return range;
 };
+
 
 /**
  * @method      typeOf      明确诊断参数的具体类型
