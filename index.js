@@ -361,6 +361,26 @@ Common.prototype.first = function(input){
         return false;
 };
 
+/**
+ * @method      toString      转换成字符串
+ *
+ * @param       {*}       input       等待转换的值
+ * @return      {string}              当参数为对象且有message成员时返回该成员，当参数为undefined时返回''，其他的调用自身toString方法
+ */
+Common.prototype.toString = function(input) {
+    let str = '';
+    switch (typeof(input)) {
+        case 'object':
+            if (input !== null)
+                str = (input instanceof Object && input.message) ? input.message : input.toString();
+            break;
+        case 'undefined':
+            break;
+        default:
+            str = input.toString();
+    }
+    return str;
+}
 
 Common.prototype.range = function(start, end, step) {
     let range = [],
