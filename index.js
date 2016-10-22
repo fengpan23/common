@@ -343,6 +343,17 @@ Common.prototype.isEmail = function(input) {
 };
 
 /**
+ * @method      isnumeric      检验参数是否为字面数值
+ *
+ * @param       {*}             input       等待检验的值
+ * @return      {boolean}                       返回{boolean}
+ */
+Common.prototype.isNumeric = function(input) {
+    let whitespace = " \n\r\t\f\x0b\xa0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000";
+    return (typeof input === 'number' || (typeof input === 'string' && whitespace.indexOf(input.slice(-1)) === -1)) && input !== '' && !isNaN(input);
+}
+
+/**
  * @method      count      计算对象或数组的可枚举成员数
  * @param       input       {object|array}                 要计算的对象或者数组
  * @return      {int}                               返回value的可枚举成员数
