@@ -474,8 +474,6 @@ function typeOf(data) {
     }
 }
 
-function Action(){
-}
 /**
  * @method      invokeCallback      调用函数（参数各自传入）
  * @param       arguments 0     {function}              当第一个参数是{function}时, 调用该函数，绑定对象为null
@@ -483,7 +481,7 @@ function Action(){
  * @param       {...*}          arguments[...]          剩余参数作为函数调用参数传入
  * @return      {boolean}                               是否调用成功
  * */
-Action.prototype.invokeCallback = function () {
+Common.prototype.invokeCallback = function () {
     if (arguments.length > 0) {
         if (typeof(arguments[0]) === 'function') {
             arguments[0].apply(null, Array.prototype.slice.call(arguments, 1));
@@ -510,7 +508,7 @@ Action.prototype.invokeCallback = function () {
  * @return      {boolean}                           是否调用成功
  *
  * */
-Action.prototype.invokeApply = function() {
+Common.prototype.invokeApply = function() {
     if (arguments.length > 0) {
         if (typeof(arguments[0]) === 'function') {
             let arg = Array.prototype.slice.call(arguments[1], 0);
@@ -530,7 +528,7 @@ Action.prototype.invokeApply = function() {
  * @param       {object}      obj     要转换的对象
  * @return      {map|*}               参数为对象时返回转换成功的{map},否则返回参数
  * */
-Action.prototype.toMap = function(obj) {
+Common.prototype.toMap = function(obj) {
     if (typeOf(obj) === 'object') {
         let map = new Map();
         for (let k of Object.keys(obj))
@@ -541,7 +539,7 @@ Action.prototype.toMap = function(obj) {
     }
 };
 
-Action.prototype.toObj = function(map) {
+Common.prototype.toObj = function(map) {
     if (typeOf(map) === 'map') {
         let obj = Object.create(null);
         for (let item of map.entries()) {
