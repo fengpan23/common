@@ -1,5 +1,9 @@
+/**
+ * Created by fengpan23@qq.com on 2016/8/4.
+ */
+"use strict";
+const _ = require('underscore');
 function Common(){
-
 }
 
 /**
@@ -391,6 +395,22 @@ Common.prototype.toString = function(input) {
             str = input.toString();
     }
     return str;
+};
+
+/**
+ * @method      toNumber      转换为数字
+ * @param       {*}          value          需要转换的参数
+ * @param       {number}     decimal        结果的小数点后位数
+ * @param       {number}     abs            是否转换成绝对值
+ * @return      {number|string}             返回结果取决于decimal和abs
+ */
+Common.prototype.toNumber = function(value, decimal, abs) {
+    decimal = Number(decimal);
+    if (isNaN(decimal))
+        decimal = 4;
+    let number = Number(value);
+    number = isNaN(number) ? 0 : Number(decimal < 0 ? number : number.toFixed(decimal));
+    return abs ? Math.abs(number) : number;
 }
 
 Common.prototype.range = function(start, end, step) {
@@ -549,6 +569,39 @@ Common.prototype.toObj = function(map) {
     } else {
         return map;
     }
+};
+
+function chr(code) {
+    code = Number(code);
+    if (code > 0xFFFF) {
+        code -= 0x10000;
+        return String.fromCharCode(0xD800 + (code >> 10), 0xDC00 + (code & 0x3FF));
+    }
+    return String.fromCharCode(code);
+}
+
+/**
+ * make uniqueness str  (生成随机标识符，小范围使用，结果不唯一)
+ * @param len
+ * @returns {string}
+ */
+Common.prototype.uniqueness = function(len) {
+    len = Number(len) <= 0 ? 8 : len;
+    let result = '';
+    for (let i = 0; i < len; i++) {
+        switch (_.random(1, 3)) {
+            case 1:
+                result += chr(_.random(48, 57));
+                break;
+            case 2:
+                result += chr(_.random(65, 90));
+                break;
+            case 3:
+                result += chr(_.random(97, 122));
+                break;
+        }
+    }
+    return result;
 };
 
 module.exports =  new Common();
