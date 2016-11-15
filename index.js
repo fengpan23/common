@@ -1,10 +1,8 @@
 /**
  * Created by fengpan23@qq.com on 2016/8/4.
  */
-"use strict";
 const _ = require('underscore');
-function Common(){
-}
+function Common(){}
 
 /**
  * 判断是否为空
@@ -602,6 +600,16 @@ Common.prototype.uniqueness = function(len) {
         }
     }
     return result;
+};
+
+Common.prototype.safeParse = function (input) {
+    let data = null;
+    try{
+        data = JSON.parse(input);
+    }catch (e){
+        console.error('json parse error', e);
+    }
+    return data;
 };
 
 module.exports =  new Common();
